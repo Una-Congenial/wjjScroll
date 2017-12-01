@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>第五个scroll</title>
+</head>
+<style>
+    .box{
+        background-color: pink;
+        height: 400px;
+        width: 200px;
+        overflow: hidden;
+    }
+    .left{
+        /*.box与.left 的 width差值是滚动条的宽度*/
+        width: 206px;
+        height: 400px;
+    }
+    .scroll{
+        overflow-y: scroll;
+    }
+
+/**
+ * 定义滚动样式
+ */
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+/*这个滚动条就在当前盒子的最右边，滚动条本身有自己的宽度，因为用了一个overflow属性，超过宽的部分就隐藏，所以只需要当移入移出的时候控制好宽度让滚动条出来就行了。*/
+::-webkit-scrollbar
+{
+    width: 6px;
+    height: 16px;
+    background-color: #F5F5F5;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.title{
+    width: 200px;
+    height: 100px;
+    background-color: yellowgreen;
+}
+.right{
+    margin-left: 30px;
+    width: 100%;
+    height: 500px;
+}
+</style>
+<body>
+<h4>左边列表有滚动条，右边内容区域有内容但是也可以滚动，互不影响</h4>
+<p>这个涉及到关于自适应布局,我这里用的是flex布局，不过也可以使用定位或者浮动</p>
+<hr>
+<div style='display: flex'>
+    <div>
+        <div class="title">
+        我是title部分，希望你在滚动的时候不要压着我的内容
+        </div>
+        <div class='box'>
+            <div class="left scroll">
+                    <ul>
+                        <li>我是第一个scroll</li>
+                        <li>滚动滚动1</li>
+                        <li>滚动滚动2</li>
+                        <li>滚动滚动3</li>
+                        <li>滚动滚动4</li>
+                        <li>滚动滚动5</li>
+                        <li>滚动滚动6</li>
+                        <li>滚动滚动7</li>
+                        <li>滚动滚动8</li>
+                        <li>滚动滚动1</li>
+                        <li>滚动滚动2</li>
+                        <li>滚动滚动3</li>
+                        <li>滚动滚动4</li>
+                        <li>滚动滚动5</li>
+                        <li>滚动滚动6</li>
+                        <li>滚动滚动7</li>
+                        <li>滚动滚动8</li>
+                        <li>滚动滚动1</li>
+                        <li>滚动滚动2</li>
+                        <li>滚动滚动3</li>
+                        <li>滚动滚动4</li>
+                        <li>滚动滚动5</li>
+                        <li>滚动滚动6</li>
+                        <li>滚动滚动7</li>
+                        <li>滚动滚动8</li>
+                        <li>滚动滚动1</li>
+                        <li>滚动滚动2</li>
+                        <li>滚动滚动3</li>
+                        <li>滚动滚动4</li>
+                        <li>滚动滚动5</li>
+                        <li>滚动滚动6</li>
+                        <li>滚动滚动7</li>
+                        <li>滚动滚动8</li>
+                    </ul></div>
+        </div>
+    </div>
+    <div style='width: 100%;flex:1'>
+        <div class="right" style='
+                width: 100%;
+                background-color: #ff9;
+                overflow: hidden;
+                overflow-y: scroll;'>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+                <p>我是内容区域</p>
+          </div>
+    </div>
+</div>
+
+
+</body>
+<script>
+function jjScroll(obj){
+//获取传入元素
+var $=document.querySelector.bind(document);
+var $el=$(obj.element);
+var initW=206;
+//监听事件
+$el.addEventListener('mouseover',function(){
+    this.style.width=(initW-6) + 'px'
+})
+$el.addEventListener('mouseout',function(){
+    this.style.width=initW + 'px'
+})
+}
+
+jjScroll({
+    element:'.left'
+})
+</script>
+</html>
